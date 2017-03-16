@@ -3,11 +3,6 @@ buildscript {
         jcenter()
         mavenCentral()
     }
-
-    dependencies {
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
-        classpath 'com.android.tools.build:gradle:2.3.0'
-    }
 }
 
 apply plugin: 'org.greenrobot.greendao'
@@ -32,8 +27,9 @@ android {
         }
     }
 }
+
 greendao {
-    targetGenDir "src/main/java/"
+    schemaVersion 1
 }
 
 dependencies {
@@ -45,5 +41,4 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'org.greenrobot:greendao-generator:3.2.0'
     compile 'org.greenrobot:greendao:3.2.0'
-
 }

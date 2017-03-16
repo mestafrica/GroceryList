@@ -3,12 +3,19 @@
     package="com.zianos.grocerylist">
 
     <application
+        android:name=".GroceryApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="DATABASE"
+            android:value="grocery.db" />
+
         <activity android:name=".GroceryActivity">
+        </activity>
+        <activity android:name=".ScanActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

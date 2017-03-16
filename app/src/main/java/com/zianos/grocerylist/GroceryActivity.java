@@ -1,12 +1,15 @@
 package com.zianos.grocerylist;
 
+import android.app.Application;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.zianos.grocerylist.adapter.GroceryAdapter;
 import com.zianos.grocerylist.model.Grocery;
+import com.zianos.grocerylist.model.GroceryDao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,17 +21,16 @@ public class GroceryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery);
 
-        ArrayList<Grocery> groceryItems = new ArrayList<Grocery>(Arrays.asList(
-                new Grocery("Apple", 4.0),
-                new Grocery("Ground Nut Paste", 16.8),
-                new Grocery("Yoghurt", 22.0),
-                new Grocery("Ground Nut Paste", 16.8),
-                new Grocery("Digestives", 11.0),
-                new Grocery("Flour", 24)
-        ));
+        //Get the application and cast it to a groceryApplication
+        GroceryApplication groceryApplication = (GroceryApplication) getApplication();
+
+        //Get  a connection to the grocery database
+        GroceryDao groceryDao = groceryApplication.getDaoSession().getGroceryDao();
 
         ListView groceryListView = (ListView) findViewById(R.id.grocery_list_view);
-        ListAdapter adapter = new GroceryAdapter(this, 0, groceryItems);
+
+        //Pass all of the items in the table into the Adapter
+        ListAdapter adapter = new GroceryAdapter(this, 0, groceryDao.loadAll());
 
         groceryListView.setAdapter(adapter);
     }
